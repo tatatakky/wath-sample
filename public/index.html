@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>WATH sample</title>
+    <script type="text/javascript">
+      const wasmFile = "/wath_sample/wasm/wath.wasm"
+      const imports = {};
+      WebAssembly.instantiateStreaming(fetch(wasmFile), imports)
+        .then(obj => {
+          const num = 5.0;
+
+          const my_sin  = obj.instance.exports.wath_sin;
+          const res_sin = my_sin(num);
+          console.log(`sin(${num}): ${res_sin}`);
+
+          const my_sqrt  = obj.instance.exports.wath_sqrt;
+          const res_sqrt = my_sqrt(num);
+          console.log(`sqrt(${num}): ${res_sqrt}`);
+        });
+    </script>
+  </head>
+  <body>
+    <h2>WATH Sample</h2>
+    <p> Web Assembly for maTH function!</p>
+  </body>
+</html>

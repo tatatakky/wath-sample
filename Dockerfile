@@ -1,4 +1,4 @@
-FROM node:14
+FROM --platform=linux/amd64 node:22
 
 RUN set -eux; \
     apt-get update; \
@@ -12,8 +12,8 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt/; \
-    curl https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-20/wasi-sdk-20.0-linux.tar.gz -L | tar zx
-ENV PATH /opt/wasi-sdk-20.0/bin:$PATH
+    curl https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-25/wasi-sdk-25.0-x86_64-linux.tar.gz -L | tar zx
+ENV PATH /opt/wasi-sdk-25.0-x86_64-linux/bin:$PATH
 
 WORKDIR /root
 RUN git clone https://github.com/tatatakky/wath.git && \
